@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    resource_group: table1twansiblerg
+    webapp_name: table1twwebapp
+    location: canadacentral
+  tasks:
+    - name: Need an RG
+      azure_rm_resourcegroup:
+        name: "{{ resource_group  }}"
+        location: "{{ location }}"
+    - name: How about a webapp
+      azure_rm_webapp:
+        resource_group: "{{ resource_group }}"
+        name: "{{ webapp_name }}"
+        plan:
+          resource_group: "{{ resource_group }}"
+          name: table1twappplan
+          is_linux: false
+          sku: S1
+          number_of_workers: 1
+        container_settings: 
+          name: nginx
+

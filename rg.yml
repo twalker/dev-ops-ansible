@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Create a resource group
+      azure_rm_resourcegroup:
+        name: table1twansiblerg
+        location: canadacentral
+      register: rg
+    - debug:
+        var: rg
